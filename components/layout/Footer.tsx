@@ -8,7 +8,7 @@ import { areasData } from '@/lib/areasData';
 
 export function Footer() {
   return (
-    <footer id="main-footer" className="bg-black text-white border-t border-white/10 pt-20 pb-16 px-6 md:px-12 lg:px-16 relative overflow-hidden">
+    <footer id="main-footer" className="bg-black text-white border-t border-white/10 pt-20 pb-28 sm:pb-16 px-6 md:px-12 lg:px-16 relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Top Editorial Banner */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end pb-16 border-b border-white/10">
@@ -163,6 +163,22 @@ export function Footer() {
               الشروط والأحكام
             </Link>
           </div>
+        </div>
+
+        {/* NasharHub Attribution */}
+        <div className="pt-6 mt-6 border-t border-white/10 flex items-center justify-center text-center">
+          <p className="text-xs sm:text-sm font-normal text-gray-300 inline-flex items-center flex-wrap justify-center gap-1.5">
+            <span>تم تصميم الموقع بواسطة</span>
+            <a
+              id="footer-nasharhub-link"
+              href="https://nasharhub.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-white hover:text-gray-200 underline underline-offset-4 decoration-white/40 hover:decoration-white transition-colors"
+            >
+              NasharHub
+            </a>
+          </p>
         </div>
       </div>
     </footer>
