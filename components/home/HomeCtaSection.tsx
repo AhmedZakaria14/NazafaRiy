@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { siteConfig } from '@/lib/siteConfig';
-import { Sparkles, ArrowLeft, MessageSquare, ShieldCheck, CheckCircle } from 'lucide-react';
+import { ArrowLeft, MessageSquare, ShieldCheck, CheckCircle } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export function HomeCtaSection() {
@@ -17,8 +17,7 @@ export function HomeCtaSection() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/[0.03] rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-5xl mx-auto text-center relative z-10">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full liquid-glass border border-white/20 text-xs sm:text-sm font-light text-gray-200 mb-6">
-          <Sparkles className="w-4 h-4 text-white" />
+        <div className="inline-flex items-center px-4 py-1.5 rounded-full liquid-glass border border-white/20 text-xs sm:text-sm font-light text-gray-200 mb-6">
           <span>احصل على تجربة تنظيف فاخرة وراقية</span>
         </div>
 

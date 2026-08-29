@@ -2,7 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { siteConfig } from '@/lib/siteConfig';
-import { Sparkles, ArrowLeft, CheckCircle2, ShieldCheck, Tag, Zap } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, ShieldCheck, Tag, Zap } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: `باقات وعروض النظافة بالرياض | خصومات حصرية وضمان فندقي | ${siteConfig.name}`,

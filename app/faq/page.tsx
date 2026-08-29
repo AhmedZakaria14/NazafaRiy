@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Sparkles, HelpCircle, ArrowLeft } from 'lucide-react';
+import { HelpCircle, ArrowLeft } from 'lucide-react';
 import { siteConfig } from '@/lib/siteConfig';
 import { FaqAccordion } from '@/components/faq/FaqAccordion';
 

@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { servicesData } from '@/lib/servicesData';
-import { ArrowUpLeft, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ArrowUpLeft, CheckCircle2 } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export function ServicesBento() {
@@ -18,8 +18,7 @@ export function ServicesBento() {
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 sm:mb-16 gap-6">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/5 border border-black/10 text-xs font-medium text-black/70 mb-3">
-              <Sparkles className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-black/5 border border-black/10 text-xs font-medium text-black/70 mb-3">
               <span>خدماتنا المتخصصة</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-black leading-[1.2]">

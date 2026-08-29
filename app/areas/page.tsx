@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { areasData } from '@/lib/areasData';
 import { siteConfig } from '@/lib/siteConfig';
-import { MapPin, Clock, ArrowUpLeft, ShieldCheck, Sparkles } from 'lucide-react';
+import { MapPin, Clock, ArrowUpLeft, ShieldCheck } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: `مناطق الخدمة وأحياء الرياض | تغطية شاملة لكافة الأحياء | ${siteConfig.name}`,

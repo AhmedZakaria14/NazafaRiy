@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { servicesData } from '@/lib/servicesData';
 import { areasData } from '@/lib/areasData';
 import { siteConfig } from '@/lib/siteConfig';
-import { Sparkles, ShieldCheck, MessageSquare, Send, Check } from 'lucide-react';
+import { ShieldCheck, MessageSquare, Send, Check } from 'lucide-react';
 
 export function BookingWizard() {
   const searchParams = useSearchParams();
@@ -62,8 +62,7 @@ export function BookingWizard() {
           <span className="text-white">طلب خدمة</span>
         </div>
 
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full liquid-glass border border-white/20 text-xs font-light text-gray-300 mb-4">
-          <Sparkles className="w-3.5 h-3.5 text-white" />
+        <div className="inline-flex items-center px-3.5 py-1 rounded-full liquid-glass border border-white/20 text-xs font-light text-gray-300 mb-4">
           <span>حجز سريع ومباشر في أقل من دقيقة</span>
         </div>
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-white mb-4">

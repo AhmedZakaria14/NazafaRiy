@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BlogPost } from '@/lib/blogData';
-import { Clock, ArrowUpLeft, Search, Tag, Sparkles, Filter, BookOpen } from 'lucide-react';
+import { Clock, ArrowUpLeft, Search, Tag, Filter, BookOpen } from 'lucide-react';
 
 interface Props {
   posts: BlogPost[];

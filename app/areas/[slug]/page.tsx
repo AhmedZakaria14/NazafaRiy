@@ -6,7 +6,7 @@ import { areasData } from '@/lib/areasData';
 import { servicesData } from '@/lib/servicesData';
 import { blogPosts } from '@/lib/blogData';
 import { siteConfig } from '@/lib/siteConfig';
-import { MapPin, Clock, ArrowLeft, ArrowUpLeft, ShieldCheck, CheckCircle2, MessageSquare, BookOpen, Sparkles } from 'lucide-react';
+import { MapPin, Clock, ArrowLeft, ArrowUpLeft, ShieldCheck, CheckCircle2, MessageSquare, BookOpen } from 'lucide-react';
 
 interface Props {
   params: Promise<{ slug: string }>;

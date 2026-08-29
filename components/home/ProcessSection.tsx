@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
-import { Sparkles, Calendar, MapPin, Truck, Sparkle } from 'lucide-react';
+import { Calendar, MapPin, Truck, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 
 export function ProcessSection() {
@@ -27,7 +27,7 @@ export function ProcessSection() {
     },
     {
       number: '04',
-      icon: Sparkle,
+      icon: ShieldCheck,
       title: 'نعتني بكل التفاصيل ونسلمك المكان',
       desc: 'تنفيذ دقيق لكافة متطلبات النظافة والتعقيم والتعطير مع فحص تسليم مفصل يضمن رضاك التام بنسبة 100%.',
     },
@@ -43,8 +43,7 @@ export function ProcessSection() {
         {/* Section Title */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/5 border border-black/10 text-xs font-medium text-black/70 mb-3">
-              <Sparkles className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-black/5 border border-black/10 text-xs font-medium text-black/70 mb-3">
               <span>آلية العمل السلسة</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-black leading-[1.2]">

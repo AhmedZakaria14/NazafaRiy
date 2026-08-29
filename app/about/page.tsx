@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { siteConfig } from '@/lib/siteConfig';
-import { Sparkles, ShieldCheck, HeartHandshake, Eye, Award, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, HeartHandshake, Eye, Award, CheckCircle2 } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: `من نحن | معايير الفخامة والريادة في خدمات النظافة | ${siteConfig.name}`,
@@ -66,8 +66,7 @@ export default function AboutPage() {
         </div>
 
         <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full liquid-glass border border-white/20 text-xs font-light text-gray-300 mb-6">
-            <Sparkles className="w-3.5 h-3.5 text-white" />
+          <div className="inline-flex items-center px-3.5 py-1 rounded-full liquid-glass border border-white/20 text-xs font-light text-gray-300 mb-6">
             <span>رؤيتنا وقيمنا الأساسية</span>
           </div>
 

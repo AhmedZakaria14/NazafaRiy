@@ -2,7 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { siteConfig } from '@/lib/siteConfig';
-import { Sparkles, Phone, MessageSquare, Mail, MapPin, Clock } from 'lucide-react';
+import { Phone, MessageSquare, Mail, MapPin, Clock } from 'lucide-react';
 import { ContactForm } from '@/components/contact/ContactForm';
 
 export const metadata: Metadata = {
@@ -65,8 +65,7 @@ export default function ContactPage() {
             <span className="text-white">تواصل معنا</span>
           </div>
 
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full liquid-glass border border-white/20 text-xs font-light text-gray-300 mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-white" />
+          <div className="inline-flex items-center px-3.5 py-1 rounded-full liquid-glass border border-white/20 text-xs font-light text-gray-300 mb-4">
             <span>فريق خدمة العملاء بالرياض</span>
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight leading-[1.18] text-white mb-6">

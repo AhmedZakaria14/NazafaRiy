@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Sparkles, Shield, Cpu, Users, Award, Clock } from 'lucide-react';
+import { Shield, Cpu, Users, Award, Clock } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export function WhyUsEditorial() {
@@ -44,8 +44,7 @@ export function WhyUsEditorial() {
       <div className="max-w-7xl mx-auto">
         {/* Editorial Heading */}
         <div className="max-w-3xl mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full liquid-glass border border-white/20 text-xs font-light text-gray-300 mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-white" />
+          <div className="inline-flex items-center px-3.5 py-1 rounded-full liquid-glass border border-white/20 text-xs font-light text-gray-300 mb-4">
             <span>فلسفة العناية بالمكان</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-[1.2] text-white">

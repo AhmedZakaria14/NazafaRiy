@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { servicesData } from '@/lib/servicesData';
-import { Sparkles, ArrowUpLeft, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { ArrowUpLeft, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 import { siteConfig } from '@/lib/siteConfig';
 
@@ -61,8 +61,7 @@ export default function ServicesPage() {
         </div>
 
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full liquid-glass border border-white/20 text-xs font-light text-gray-300 mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-white" />
+          <div className="inline-flex items-center px-3.5 py-1 rounded-full liquid-glass border border-white/20 text-xs font-light text-gray-300 mb-4">
             <span>خدمات متكاملة بمعايير عالمية</span>
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight leading-[1.18] text-white mb-6">

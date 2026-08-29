@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { blogPosts } from '@/lib/blogData';
 import { siteConfig } from '@/lib/siteConfig';
-import { BookOpen, Sparkles, ShieldCheck, MapPin, Layers } from 'lucide-react';
+import { BookOpen, CheckCircle2, ShieldCheck, MapPin, Layers } from 'lucide-react';
 import BlogSearchFilter from '@/components/blog/BlogSearchFilter';
 
 export const metadata: Metadata = {
@@ -87,7 +87,7 @@ export default function BlogPage() {
           {/* Quick Pillar Badges */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-8 text-xs font-light">
             <div className="p-3 rounded-xl bg-white/5 border border-white/10 flex items-center gap-2.5">
-              <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
+              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
               <span>أدلة موثقة علمياً</span>
             </div>
             <div className="p-3 rounded-xl bg-white/5 border border-white/10 flex items-center gap-2.5">

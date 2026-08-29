@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { areasData } from '@/lib/areasData';
-import { MapPin, ArrowUpLeft, Clock, Sparkles } from 'lucide-react';
+import { MapPin, ArrowUpLeft, Clock } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export function AreasSection() {

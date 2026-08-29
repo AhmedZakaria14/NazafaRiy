@@ -8,7 +8,6 @@ import { blogPosts } from '@/lib/blogData';
 import { areasData } from '@/lib/areasData';
 import { siteConfig } from '@/lib/siteConfig';
 import {
-  Sparkles,
   ArrowLeft,
   ArrowUpLeft,
   ShieldCheck,
@@ -150,8 +149,7 @@ export default async function ServiceDetailPage({ params }: Props) {
         {/* Hero Section of Service */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end pb-12">
           <div className="lg:col-span-8">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full liquid-glass border border-white/20 text-xs font-light text-gray-300 mb-4">
-              <Sparkles className="w-3.5 h-3.5 text-white" />
+            <div className="inline-flex items-center px-3.5 py-1 rounded-full liquid-glass border border-white/20 text-xs font-light text-gray-300 mb-4">
               <span>{service.category}</span>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-[1.18] text-white mb-4">
@@ -236,7 +234,7 @@ export default async function ServiceDetailPage({ params }: Props) {
             {service.riyadhSpecificCare && service.riyadhSpecificCare.length > 0 && (
               <div className="liquid-glass rounded-2xl p-7 border border-white/15 space-y-4">
                 <h3 className="text-lg font-medium text-white flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-amber-400" />
+                  <ShieldCheck className="w-4 h-4 text-amber-400" />
                   <span>معايير مخصصة لبيئة ومناخ مدينة الرياض</span>
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
@@ -253,7 +251,7 @@ export default async function ServiceDetailPage({ params }: Props) {
             {/* Highlights */}
             <div className="liquid-glass-card rounded-2xl p-8 space-y-6 shadow-xl">
               <h3 className="text-xl font-medium text-white flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-white" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                 <span>مميزات الخدمة وضمانات الجودة</span>
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

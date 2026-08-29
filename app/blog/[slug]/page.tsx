@@ -7,7 +7,7 @@ import { blogPosts } from '@/lib/blogData';
 import { servicesData } from '@/lib/servicesData';
 import { areasData } from '@/lib/areasData';
 import { siteConfig } from '@/lib/siteConfig';
-import { Clock, ArrowLeft, ArrowUpLeft, Sparkles, BookOpen, ShieldCheck, MapPin, Tag, Share2, MessageSquare, CheckCircle2, UserCheck } from 'lucide-react';
+import { Clock, ArrowLeft, ArrowUpLeft, BookOpen, ShieldCheck, MapPin, Tag, Share2, MessageSquare, CheckCircle2, UserCheck } from 'lucide-react';
 import TableOfContents from '@/components/blog/TableOfContents';
 import MarkdownRenderer from '@/components/blog/MarkdownRenderer';
 
@@ -200,7 +200,7 @@ export default async function BlogPostPage({ params }: Props) {
         {matchingServices.length > 0 && (
           <div className="my-12 liquid-glass-card rounded-2xl p-6 sm:p-8 border border-white/15 shadow-xl">
             <div className="flex items-center gap-2.5 mb-4 text-white">
-              <Sparkles className="w-5 h-5 text-amber-400" />
+              <ShieldCheck className="w-5 h-5 text-amber-400" />
               <h3 className="text-lg font-medium">الخدمات الاحترافية المرتبطة بهذا الدليل</h3>
             </div>
             <p className="text-xs sm:text-sm text-gray-300 font-light mb-6">
