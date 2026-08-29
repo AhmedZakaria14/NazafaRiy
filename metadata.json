@@ -1,0 +1,6 @@
+{
+  "name": "صفوة الرياض | شركة خدمات نظافة فاخرة بالرياض",
+  "description": "شركة تنظيف بالرياض تقدم خدمات نظافة متخصصة للمنازل والفلل والمجالس والمكاتب، بأيدي فرق احترافية وأحدث التقنيات وأعلى معايير الفخامة.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
