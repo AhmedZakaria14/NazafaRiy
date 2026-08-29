@@ -1,9 +1,17 @@
 import type { Metadata } from 'next';
+import { IBM_Plex_Sans_Arabic } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { MobileBottomBar } from '@/components/layout/MobileBottomBar';
 import { siteConfig } from '@/lib/siteConfig';
+
+const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
+  subsets: ['arabic', 'latin'],
+  weight: ['200', '300', '400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-ibm-plex',
+});
 
 export const metadata: Metadata = {
   title: {
@@ -212,7 +220,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="ar" dir="rtl" className="bg-black text-white selection:bg-white selection:text-black">
+    <html lang="ar" dir="rtl" className={`${ibmPlexSansArabic.variable} ${ibmPlexSansArabic.className} bg-black text-white selection:bg-white selection:text-black`}>
       <head>
         <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
         <link rel="author" type="text/plain" href="/llms.txt" />
@@ -224,7 +232,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredDataGraph) }}
         />
       </head>
-      <body className="min-h-screen bg-black text-white antialiased flex flex-col font-sans overflow-x-hidden" suppressHydrationWarning>
+      <body className={`${ibmPlexSansArabic.className} min-h-screen bg-black text-white antialiased flex flex-col overflow-x-hidden`} suppressHydrationWarning>
         {/* Skip to Main Content for Accessible Keyboard Navigation */}
         <a
           href="#main-content"
