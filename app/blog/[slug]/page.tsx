@@ -33,11 +33,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${post.title} | دليل ${siteConfig.name}`,
-    description: post.excerpt,
-    keywords: [...post.tags, 'خدمات تنظيف بالرياض', 'شركة تنظيف بالرياض'],
+    description: `${post.excerpt} للحجز والاستفسار المباشر اتصل بنا: 0575386029.`,
+    keywords: [...post.tags, 'خدمات تنظيف بالرياض', 'شركة تنظيف بالرياض', '0575386029'],
     openGraph: {
       title: `${post.title} | ${siteConfig.name}`,
-      description: post.excerpt,
+      description: `${post.excerpt} هاتف: 0575386029.`,
       images: [{ url: post.image }],
       type: 'article',
       publishedTime: post.date,

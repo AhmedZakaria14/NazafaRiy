@@ -44,18 +44,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${service.title} بالرياض | ${siteConfig.name}`,
-    description: `${service.shortDesc} أفضل الأسعار والضمانات مع أحدث الأجهزة الألمانية في جميع أحياء الرياض.`,
+    description: `${service.shortDesc} أفضل الأسعار والضمانات مع أحدث الأجهزة في جميع أحياء الرياض. للحجز والاستفسار: 0575386029.`,
     keywords: [
       service.title,
       `${service.title} بالرياض`,
       `شركة ${service.title}`,
       `اسعار ${service.title}`,
       'خدمات نظافة في الرياض',
-      'شركة تنظيف منازل بالرياض'
+      'شركة تنظيف منازل بالرياض',
+      '0575386029'
     ],
     openGraph: {
       title: `${service.title} بالرياض | ${siteConfig.name}`,
-      description: service.shortDesc,
+      description: `${service.shortDesc} للحجز المباشر اتصل بنا على 0575386029.`,
       images: [{ url: service.image }],
     },
     alternates: {
@@ -424,7 +425,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                 className="w-full text-center text-xs text-gray-300 hover:text-white py-2.5 rounded-xl border border-white/15 liquid-glass flex items-center justify-center gap-2 transition-colors block"
               >
                 <PhoneCall className="w-3.5 h-3.5 text-sky-400" />
-                <span>اتصال مباشر: {siteConfig.phone}</span>
+                <span>اتصال مباشر: {siteConfig.phoneDisplay}</span>
               </a>
 
               <p className="text-[11px] text-center text-gray-400 font-light">

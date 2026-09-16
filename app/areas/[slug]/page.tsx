@@ -30,17 +30,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${area.title} | ${siteConfig.name}`,
-    description: `${area.description} تغطية شاملة لأحياء ${area.neighborhoods.slice(0, 5).join('، ')} بأحدث الأجهزة الألمانية.`,
+    description: `${area.description} تغطية شاملة لأحياء ${area.neighborhoods.slice(0, 5).join('، ')} بأحدث الأجهزة. للحجز الفوري اتصل الآن: 0575386029.`,
     keywords: [
       area.title,
       `شركة تنظيف ${area.name}`,
       `تنظيف منازل ${area.name}`,
       `تنظيف فلل ${area.name}`,
+      '0575386029',
       ...area.neighborhoods.map((n) => `تنظيف ${n}`)
     ],
     openGraph: {
       title: `${area.title} | ${siteConfig.name}`,
-      description: area.description,
+      description: `${area.description} للحجز الفوري اتصل بنا على 0575386029.`,
     },
     alternates: {
       canonical: `${siteConfig.url}/areas/${area.slug}`,
