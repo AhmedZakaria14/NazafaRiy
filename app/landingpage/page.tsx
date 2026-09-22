@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { siteConfig } from '@/lib/siteConfig';
+import { SafwaLogo } from '@/components/ui/SafwaLogo';
 import {
   Phone,
   PhoneCall,
@@ -10,465 +11,597 @@ import {
   CheckCircle2,
   ShieldCheck,
   Clock,
-  Sparkles,
   Star,
   ChevronDown,
   ArrowLeft,
   MapPin,
   Award,
-  Zap,
+  Calendar,
+  Building2,
+  Home,
+  Check,
+  BadgeCheck,
+  Headphones,
+  Users,
+  Sparkles,
 } from 'lucide-react';
 
 interface ServiceOffer {
   id: string;
   name: string;
+  category: string;
   price: string;
   priceNum: number;
   unit?: string;
-  icon: string;
+  tag?: string;
   desc: string;
-  badge?: string;
   features: string[];
 }
 
 const servicesList: ServiceOffer[] = [
   {
     id: 'apartment',
-    name: 'تنظيف شقة',
+    name: 'تنظيف شامل للشقق',
+    category: 'شقق سكنية',
     price: '299 ر.س',
     priceNum: 299,
-    icon: '🛏️',
-    badge: 'الأكثر طلباً',
-    desc: 'تنظيف شامل لجميع غرف الشقة، المطابخ، الحمامات، والأرضيات بعناية فائقة',
-    features: ['غسيل وتلميع الأرضيات', 'تعقيم الحمامات والمطبخ', 'تنظيف النوافذ والأبواب', 'تعطير مجاني'],
+    tag: 'العرض الأكثر طلباً',
+    desc: 'تنظيف فندقي متكامل لجميع الغرف، الصالات، دورات المياه والمطابخ بأحدث ماكينات البخار وتلميع السيراميك.',
+    features: [
+      'غسيل وتلميع الأرضيات والممرات',
+      'تعقيم عميق للمطابخ ودورات المياه',
+      'تنظيف النوافذ ومجاري الألمنيوم',
+      'مسح الأبواب والإنارة والجبسيات',
+    ],
   },
   {
     id: 'floor',
-    name: 'تنظيف دور',
+    name: 'تنظيف دور كامل',
+    category: 'أدوار مستقلة',
     price: '350 ر.س',
     priceNum: 350,
-    icon: '🏢',
-    badge: 'عرض خاص',
-    desc: 'تنظيف متكامل للدور بالكامل مع غسيل الممرات والمجالس والصالات بأحدث الأجهزة',
-    features: ['تنظيف المجالس والصالات', 'غسيل وتطهير الممرات', 'تنظيف المطابخ بالبخار', 'إزالة البقع الصعبة'],
+    tag: 'عرض خاص',
+    desc: 'عناية شاملة للأدوار المستقلة والملحقات، تشمل المجالس الواسعة، المطابخ الكبيرة، والممرات بأيدي عمالة متخصصة.',
+    features: [
+      'تنظيف شامل للمجالس وصالات الاستقبال',
+      'إزالة بقع الدهون والزيوت من المطابخ',
+      'غسيل وتطهير كافة دورات المياه والمستودع',
+      'تنظيف وتعقيم البلكونات والنوافذ',
+    ],
   },
   {
     id: 'villa',
-    name: 'تنظيف فيلا',
+    name: 'تنظيف وتجهيز الفلل',
+    category: 'فلل وقصور',
     price: '750 ر.س',
     priceNum: 750,
-    icon: '🏰',
-    badge: 'باقة VIP',
-    desc: 'تنظيف متكامل للفيلا بالكامل من الداخل والخارج مع الحوش والمداخل والواجهات',
-    features: ['غسيل الحوش والمداخل', 'تنظيف الدرج والدرابزين', 'تنظيف الواجهات والزجاج', 'طاقم عمل كامل متخصص'],
+    tag: 'باقة متكاملة',
+    desc: 'برنامج نظافة شامل لكامل مرافق الفيلا من الداخل والخارج، متضمناً الحوش الخارجي، المداخل، والأسطح.',
+    features: [
+      'تنظيف داخلي متكامل لكافة الأدوار والغرف',
+      'غسيل الحوش والمداخل والأرضيات الخارجية',
+      'تنظيف وتلميع الدرج والدرابزين الزجاجي/الحديد',
+      'طاقم عمل كامل بقيادة مشرف ميداني مسؤول',
+    ],
   },
   {
     id: 'sofa',
-    name: 'غسيل كنب ومجالس بالبخار',
+    name: 'غسيل مجالس وكنب بالبخار الحار',
+    category: 'مفروشات وأقمشة',
     price: '199 ر.س',
     priceNum: 199,
-    icon: '🛋️',
-    badge: 'تجفيف فوري',
-    desc: 'إزالة أصعب البقع والدهون والروائح بتقنية البخار الحار والتعقيم الفندقي',
-    features: ['إزالة البقع المستعصية', 'تعقيم بالبخار الحار 140°', 'شفط الأتربة العميقة', 'تجفيف سريع في 60 دقيقة'],
+    tag: 'تجفيف سريع',
+    desc: 'تقنية البخار الحار 140 درجة لشفط الأتربة العميقة، القضاء على حشرات الفراش والبكتيريا، وإزالة أصعب البقع.',
+    features: [
+      'إزالة البقع العنيدة والمستعصية',
+      'تعقيم حراري ومكافحة مسببات الحساسية',
+      'شفط مائي قوي وتجفيف خلال 60 دقيقة',
+      'مواد حماية للأقمشة من الاتساخ المستقبلي',
+    ],
   },
   {
     id: 'ac',
-    name: 'غسيل وتنظيف مكيفات',
+    name: 'غسيل وصيانة المكيفات السبليت',
+    category: 'تكييف وتبريد',
     price: '79 ر.س',
     priceNum: 79,
     unit: 'للمكيف',
-    icon: '❄️',
-    badge: 'ضمان التبريد',
-    desc: 'تنظيف عميق للوحدات الداخلية والخارجية بأحدث مضخات المياه مع جراب الحماية',
-    features: ['غسيل الفلاتر والكويل', 'تنظيف حوض الصرف', 'فحص غاز الفريون', 'زيادة كفاءة التبريد'],
+    tag: 'ضمان الكفاءة',
+    desc: 'تنظيف عميق للوحدات الداخلية والخارجية بمضخات الضغط مع عزل وحماية الجدران والأثاث المحيط.',
+    features: [
+      'غسيل كامل للفلاتر والكويل والمروحة الداخلية',
+      'تسليك مجرى الصرف لمنع تسريب المياه',
+      'فحص قياس غاز الفريون وكفاءة التبريد',
+      'تعقيم ضد الروائح الكريهة والعفن الداخلي',
+    ],
   },
   {
     id: 'marble',
-    name: 'جلي وتلميع رخام بالماس',
+    name: 'جلي وتلميع الرخام الإيطالي',
+    category: 'أرضيات ورخام',
     price: '15 ر.س',
     priceNum: 15,
-    unit: 'للمتر',
-    icon: '💎',
-    badge: 'كريستال إيطالي',
-    desc: 'تسوية الفواصل وجلي بالماس الإيطالي مع طبقة عزل وحماية كريستالية فائقة اللمعان',
-    features: ['إزالة الخدوش والبهتان', 'معالجة فواصل التمدد', 'تلميع بالكريستال الإسباني', 'ضمان لمعان يدوم طويلاً'],
+    unit: 'للمتر المربع',
+    tag: 'كريستال إسباني',
+    desc: 'معالجة فواصل التمدد، إزالة الخدوش بالأقراص الماسية، وتطبيق طبقة تلميع وحماية بلورية فائقة الانعكاس.',
+    features: [
+      'إزالة التموجات والخدوش السطحية والعميقة',
+      'تعبئة الفواصل بمادة الجولي المطابقة للون الرخام',
+      'تلميع بمادة الكريستال الإسبانية الأصلية',
+      'ضمان لمعان ومقاومة لامتصاص السوائل',
+    ],
   },
 ];
 
-const whyUsItems = [
+const trustPillars = [
   {
-    icon: '✅',
-    title: 'فريق عمل مدرب ومحترف',
-    desc: 'عمالة نظامية ماهرة تحت إشراف هندسي وفندقي مباشر لضمان أعلى دقة في التنفيذ.',
+    title: 'كوادر فنية مدربة ومعتمدة',
+    desc: 'عمالة نظامية متخصصة ومقيمة تخضع لفحوصات دورية وتدريب احترافي على أعلى معايير العناية بالممتلكات.',
   },
   {
-    icon: '🧴',
-    title: 'مواد تنظيف وتعقيم آمنة',
-    desc: 'مستحضرات ألمانية معتمدة صديقة للبيئة وآمنة 100% على الأطفال والمفروشات.',
+    title: 'منظفات ألمانية مصرحة وصديقة للبيئة',
+    desc: 'نستخدم مستحضرات آمنة تماماً على صحة الأطفال، كبار السن، والحيوانات الأليفة، بدون روائح كيميائية نفاذة.',
   },
   {
-    icon: '⏰',
-    title: 'التزام تام بالمواعيد المحددة',
-    desc: 'وصول دقيق في الموعد المتفق عليه مع سرعة استجابة في كافة أحياء الرياض.',
+    title: 'دقة المواعيد وسرعة التواجد',
+    desc: 'فرق عمل متمركزة في مختلف قطاعات الرياض (الشمال، الشرق، الغرب، والجنوب) لضمان الوصول في الموعد المحدد.',
   },
   {
-    icon: '🔒',
-    title: 'أمانة تامة وضمان على العمل',
-    desc: 'ضمان ذهبي فندقي على كل خدمة نقدمها، وإعادة التنظيف مجاناً في حال وجود أي ملاحظة.',
+    title: 'ضمان ذهبي لإعادة التنظيف مجاناً',
+    desc: 'لا تنتهي مهمتنا إلا برضاك التام؛ يحق للعميل طلب إعادة تنظيف أي ملاحظة مجاناً خلال فترة الضمان.',
   },
   {
-    icon: '💰',
-    title: 'أسعار ثابتة بدون أي مفاجآت',
-    desc: 'أسعار شفافة ومحددة مسبقاً، بدون رسوم خفية أو تكاليف إضافية للنقل والمعدات.',
+    title: 'تسعير واضح وعقود واضحة',
+    desc: 'أسعار نهائية وثابتة بدون أي رسوم خفية أو تكاليف إضافية لنقل العمالة والمعدات داخل نطاق مدينة الرياض.',
   },
   {
-    icon: '📞',
-    title: 'خدمة عملاء ومتابعة 24 ساعة',
-    desc: 'جاهزون دائماً للرد على استفساراتكم وحجز مواعيدكم في أي وقت عبر الهاتف والواتساب.',
+    title: 'إشراف فني وخدمة عملاء مستمرة',
+    desc: 'مشرف ميداني مباشر لكل فريق عمل للتأكد من تطبيق قائمة الجودة، مع دعم هاتفي فوري على مدار الساعة.',
+  },
+];
+
+const customerReviews = [
+  {
+    name: 'عبدالله السبيعي',
+    district: 'حي الملقا - الرياض',
+    service: 'تنظيف شقة 299 ريال',
+    rating: 5,
+    comment:
+      'التزام بالميعاد بالدقيقة وفريق العمل محترم ومحترف جداً. نظفوا المطبخ والحمامات بدرجة فندقية ما شاء الله. السعر 299 ريال شامل كل شيء بدون أي زيادة.',
+  },
+  {
+    name: 'أم فيصل الشمري',
+    district: 'حي النرجس - الرياض',
+    service: 'تنظيف دور وفيلا',
+    rating: 5,
+    comment:
+      'جربت شركات كثيرة بالرياض، لكن صفوة الرياض صراحة مميزين بالحرص والأمانة والمواد اللي بدون روائح مزعجة. المشرف كان دقيق في كل زاوية.',
+  },
+  {
+    name: 'م. خالد القحطاني',
+    district: 'حي الروضة - الرياض',
+    service: 'غسيل كنب ومجالس بالبخار',
+    rating: 5,
+    comment:
+      'الكنب رجع جديد بعد ما كان فيه بقع قهوة قديمة وصعبة. التجفيف كان سريع جداً واستلمت المجلس معقم وريحته نظافة منعشة. أنصح بالتعامل معهم بشدة.',
   },
 ];
 
 const faqs = [
   {
-    q: 'هل يشمل عرض تنظيف الشقة 299 ريال كافة الغرف والمحتويات؟',
-    a: 'نعم، يشمل العرض تنظيف وتطهير شامل لجميع الغرف، المطابخ، الحمامات، الأرضيات، النوافذ والأبواب بعناية فائقة وبأحدث أجهزة التنظيف.',
+    q: 'ما الذي تشمله خدمة تنظيف الشقة بسعر 299 ريال؟',
+    a: 'تشمل الخدمة تنظيفاً شاملاً لكافة أجزاء الشقة: غسيل وتلميع الأرضيات، مسح وتطهير الجدران والأسقف، تنظيف وتعقيم المطبخ من الدهون، تنظيف وتطهير دورات المياه كاملة، مسح الأبواب والشبابيك ومجاري الألمنيوم، وتعطير المكان بمواد منعشة تدوم طويلاً.',
   },
   {
-    q: 'كيف يمكنني حجز الخدمة وتأكيد الموعد؟',
-    a: 'يمكنك الحجز فوراً بمجرد الضغط على زر الخدمة المطلوبة ليتم تحويلك مباشرة للواتساب على الرقم الموحد 0575386029 مع رسالة الحجز والسعر، أو بالاتصال المباشر.',
+    q: 'هل توجد أي مبالغ أو مصاريف إضافية للنقل والمعدات؟',
+    a: 'لا، الأسعار المعلنة نهائية وشاملة أجور العمالة، المعدات الكهربائية الألمانية، ومواد التنظيف والتعقيم لكافة أحياء ومناطق الرياض دون أي تكلفة إضافية.',
   },
   {
-    q: 'هل توجد أي رسوم إضافية لنقل العمالة أو المعدات داخل الرياض؟',
-    a: 'لا توجد أي رسوم خفية نهائياً. السعر المعلن شامل للعمالة، المعدات الألمانية، ومواد التنظيف لكافة أحياء مدينة الرياض.',
+    q: 'كيف يتم تأكيد الحجز وموعد وصول الفريق؟',
+    a: 'بمجرد اختيار الخدمة والضغط على زر الحجز عبر الواتساب أو الاتصال بالرقم 0575386029، يتواصل معك منسق الحجوزات لتحديد الساعة المناسبة لموقعك، ويصلك الفريق الميداني في الموعد المحدد مباشرة.',
   },
   {
-    q: 'ما هي مدة وصول فريق العمل بعد تأكيد الحجز؟',
-    a: 'لدينا فرق ميدانية متمركزة في شمال، شرق، غرب، وجنوب الرياض، ويمكن لفريق العمل الوصول إليكم خلال 45 إلى 90 دقيقة من تأكيد الحجز أو حسب الموعد الذي يناسبكم.',
+    q: 'ما هو الضمان المقدم على الخدمة؟',
+    a: 'نلتزم بسياسة الضمان الذهبي: تتم معاينة كافة الأعمال برفقة العميل قبل مغادرة الفريق، وفي حال وجود أي ملاحظة تتم معالجتها فوراً أو إعادة تنظيف المكان مجاناً.',
   },
 ];
 
 export default function LandingPage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
-  // Helper to build direct WhatsApp link with prefilled service and price text
   const getWhatsAppLink = (serviceName: string, price: string) => {
-    const message = `مرحباً صفوة الرياض، أود حجز خدمة ${serviceName} بسعر ${price}`;
+    const message = `السلام عليكم، أود حجز ${serviceName} بسعر ${price} المعلن في الموقع.`;
     return `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(message)}`;
   };
 
   return (
-    <div className="min-h-screen bg-[#070d18] text-white selection:bg-[#e6a800] selection:text-[#070d18] pb-28 md:pb-20 font-sans">
-      {/* Top Banner Notice */}
-      <div className="bg-gradient-to-r from-[#b8760a] via-[#e6a800] to-[#b8760a] text-[#070d18] py-2 px-4 text-center text-xs sm:text-sm font-bold shadow-md">
-        ⚡ عرض خاص لفترة محدودة | خصم يصل إلى 40% على جميع خدمات النظافة بالرياض | للحجز: {siteConfig.phoneDisplay}
+    <div className="min-h-screen bg-[#08101e] text-slate-100 font-sans selection:bg-[#c99738] selection:text-[#08101e] pb-24 md:pb-16 antialiased">
+      {/* ===================== TOP NOTIFICATION BAR ===================== */}
+      <div className="bg-[#0b172d] border-b border-[#1f3152] py-2.5 px-4">
+        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs sm:text-sm text-slate-300">
+          <div className="flex items-center gap-2">
+            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400" />
+            <span className="font-medium text-white">خدمات النظافة الميدانية متاحة الآن في جميع أحياء الرياض</span>
+          </div>
+          <div className="flex items-center gap-4 text-xs">
+            <span className="text-slate-400">حجز فوري ومعاينة مجانية</span>
+            <a
+              href={`tel:${siteConfig.phone}`}
+              className="text-[#e2ad47] font-bold hover:text-white transition-colors"
+              dir="ltr"
+            >
+              {siteConfig.phoneDisplay}
+            </a>
+          </div>
+        </div>
       </div>
 
-      {/* Main Container */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6">
-        {/* ===================== HEADER ===================== */}
+      {/* ===================== MAIN WRAPPER ===================== */}
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10">
+        {/* ===================== BRAND HERO CARD ===================== */}
         <header
-          id="landing-header"
-          className="relative mt-4 rounded-3xl p-6 sm:p-10 text-center border-2 border-[#e6a800]/50 overflow-hidden shadow-[0_10px_35px_rgba(230,168,0,0.18)]"
-          style={{
-            background: 'linear-gradient(135deg, #0d2456 0%, #081124 100%)',
-          }}
+          id="hero-header"
+          className="relative rounded-2xl bg-gradient-to-b from-[#0e1d38] to-[#0a1529] border border-[#1e335a] p-6 sm:p-10 shadow-xl overflow-hidden"
         >
-          {/* Subtle radial glow overlay */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(230,168,0,0.22),_transparent_70%)] pointer-events-none" />
+          {/* Subtle architectural background grid */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#162a4d0f_1px,transparent_1px),linear-gradient(to_bottom,#162a4d0f_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
-          {/* Logo Circle with Golden Halo */}
-          <div className="relative mx-auto w-24 h-24 rounded-full border-4 border-[#e6a800] bg-gradient-to-br from-[#12398a] to-[#07132e] flex items-center justify-center text-4xl shadow-[0_0_35px_rgba(230,168,0,0.45)] mb-4 animate-pulse">
-            <span>🧹</span>
+          {/* Top Brand Identity */}
+          <div className="relative flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 mb-6 border-b border-[#1b2f52]">
+            <div className="flex items-center gap-3.5">
+              <SafwaLogo size={48} />
+              <div className="text-right">
+                <div className="text-lg font-bold text-white tracking-tight">{siteConfig.name}</div>
+                <div className="text-xs text-slate-400 font-normal">المؤسسة الرائدة لخدمات النظافة الفندقية بالرياض</div>
+              </div>
+            </div>
+
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#132342] border border-[#233a66] text-xs text-slate-300">
+              <ShieldCheck className="w-4 h-4 text-[#e2ad47]" />
+              <span>عمالة نظامية • ضمان معتمد</span>
+            </div>
           </div>
 
-          {/* Top Badge */}
-          <div className="inline-flex items-center gap-1.5 bg-[#e6a800] text-[#070d18] text-xs font-black px-4 py-1.5 rounded-full mb-3 shadow-md tracking-wide">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>خدمات تنظيف احترافية وضمان 100%</span>
-            <Sparkles className="w-3.5 h-3.5" />
-          </div>
-
-          {/* Headline */}
-          <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-tight tracking-tight mb-3">
-            <span className="text-[#e6a800]">تنظيف</span> شقق، أدوار وفلل
-          </h1>
-
-          <p className="text-sm sm:text-base text-gray-200 max-w-xl mx-auto font-normal leading-relaxed mb-4">
-            خدمات نظافة متخصصة بأحدث الأجهزة والتقنيات مع التعقيم الشامل وضمان فندقي معتمد
-          </p>
-
-          {/* Location & Trust Tags */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-200">
-            <span className="inline-flex items-center gap-1 bg-white/10 px-3 py-1 rounded-full border border-white/15">
-              <MapPin className="w-3.5 h-3.5 text-[#e6a800]" />
-              الرياض فقط (كافة الأحياء)
+          {/* Main Title & Value Proposition */}
+          <div className="relative text-center max-w-2xl mx-auto">
+            <span className="inline-block text-xs font-semibold text-[#e2ad47] bg-[#e2ad47]/10 border border-[#e2ad47]/30 px-3 py-1 rounded-md mb-4">
+              عروض الموسم الحصرية لمدينة الرياض
             </span>
-            <span className="inline-flex items-center gap-1 bg-white/10 px-3 py-1 rounded-full border border-white/15">
-              <Star className="w-3.5 h-3.5 text-[#e6a800] fill-[#e6a800]" />
-              4.9 تقييم العملاء (1,480+ تقييم)
-            </span>
+
+            <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight tracking-tight mb-4">
+              خدمات تنظيف فندقية متكاملة <br className="hidden sm:inline" />
+              <span className="text-[#e2ad47]">للشقق، الأدوار والفلل</span>
+            </h1>
+
+            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal mb-6 max-w-xl mx-auto">
+              نوفر لك طواقم عمل متمرسة وأحدث معدات التنظيف بالبخار ومكائن جلي الرخام بمستوى يليق بمنزلك، مع الالتزام التام بالأسعار الثابتة والضمان الشامل.
+            </p>
+
+            {/* Quick Metrics Bar */}
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 max-w-lg mx-auto pt-2 pb-2 border-y border-[#182949] text-center">
+              <div className="p-2">
+                <div className="text-base sm:text-xl font-bold text-white font-mono">+1,850</div>
+                <div className="text-[11px] sm:text-xs text-slate-400">عميل في الرياض</div>
+              </div>
+              <div className="p-2 border-x border-[#182949]">
+                <div className="text-base sm:text-xl font-bold text-[#e2ad47] font-mono">100%</div>
+                <div className="text-[11px] sm:text-xs text-slate-400">ضمان رضا الجودة</div>
+              </div>
+              <div className="p-2">
+                <div className="text-base sm:text-xl font-bold text-white font-mono">4.9 / 5</div>
+                <div className="text-[11px] sm:text-xs text-slate-400">تقييم موثق</div>
+              </div>
+            </div>
           </div>
         </header>
 
-        {/* ===================== OFFER BANNER ===================== */}
+        {/* ===================== DIRECT PRICE HIGHLIGHT BANNER ===================== */}
         <section
-          id="landing-offer-banner"
-          className="mt-6 rounded-2xl p-5 sm:p-6 shadow-xl border border-[#e6a800]/40 relative overflow-hidden"
-          style={{
-            background: 'linear-gradient(135deg, #e6a800 0%, #b8760a 100%)',
-          }}
+          id="pricing-highlights"
+          aria-label="قائمة الأسعار الفورية"
+          className="mt-6 rounded-2xl bg-[#0c182e] border border-[#1b3054] p-5 sm:p-6 shadow-md"
         >
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[#070d18]">
-            <div className="text-center sm:text-right">
-              <div className="inline-flex items-center gap-1.5 bg-[#070d18]/15 px-2.5 py-0.5 rounded-md text-[11px] font-bold mb-1">
-                <Zap className="w-3 h-3 text-[#070d18]" />
-                أسعارنا الثابتة والمخفضة
-              </div>
-              <h2 className="text-lg sm:text-xl font-black">بدون رسوم خفية – الجودة مضمونة!</h2>
-              <p className="text-xs sm:text-sm font-medium text-[#070d18]/90">
-                اضغط على أي خدمة للحجز الفوري عبر واتساب بالسعر المحدد
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+            <div>
+              <div className="text-xs font-semibold text-[#e2ad47] mb-1">حجز مباشر وفوري</div>
+              <h2 className="text-lg sm:text-xl font-bold text-white">
+                باقات التنظيف الأساسية بأسعار معلنة وثابتة
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-400 mt-1">
+                اضغط على الباقة المطلوبة للانتقال الفوري إلى واتساب لتأكيد الموعد بالخدمة والسعر:
               </p>
             </div>
 
-            {/* Quick Price Pills - CLICKABLE straight to WhatsApp */}
-            <div className="flex flex-wrap sm:flex-nowrap gap-2 sm:gap-3 w-full sm:w-auto justify-center">
+            {/* Price Cards Row */}
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
               <a
-                id="quick-pill-apartment"
-                href={getWhatsAppLink('تنظيف شقة', '299 ريال')}
+                id="btn-fast-apartment-299"
+                href={getWhatsAppLink('تنظيف شقة كاملة', '299 ريال')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 sm:flex-initial text-center bg-[#070d18] text-white hover:bg-black px-4 py-2.5 rounded-xl border border-white/20 shadow-md transition-all duration-200 transform hover:-translate-y-0.5"
-                title="حجز تنظيف شقة 299 ريال"
+                className="group p-3 rounded-xl bg-[#10203d] hover:bg-[#152a50] border border-[#233a64] hover:border-[#e2ad47] text-center transition-all duration-200 cursor-pointer"
+                title="طلب حجز تنظيف شقة 299 ريال"
               >
-                <div className="text-[11px] text-gray-300 font-medium">شقة</div>
-                <div className="text-lg font-black text-[#e6a800] leading-tight">299 ر.س</div>
+                <div className="text-[11px] text-slate-300 font-medium">تنظيف شقة</div>
+                <div className="text-lg sm:text-xl font-black text-[#e2ad47] my-0.5 font-mono">299</div>
+                <div className="text-[10px] text-slate-400">ريال سعودي</div>
               </a>
 
               <a
-                id="quick-pill-floor"
-                href={getWhatsAppLink('تنظيف دور', '350 ريال')}
+                id="btn-fast-floor-350"
+                href={getWhatsAppLink('تنظيف دور كامل', '350 ريال')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 sm:flex-initial text-center bg-[#070d18] text-white hover:bg-black px-4 py-2.5 rounded-xl border border-white/20 shadow-md transition-all duration-200 transform hover:-translate-y-0.5"
-                title="حجز تنظيف دور 350 ريال"
+                className="group p-3 rounded-xl bg-[#10203d] hover:bg-[#152a50] border border-[#233a64] hover:border-[#e2ad47] text-center transition-all duration-200 cursor-pointer"
+                title="طلب حجز تنظيف دور 350 ريال"
               >
-                <div className="text-[11px] text-gray-300 font-medium">دور</div>
-                <div className="text-lg font-black text-[#e6a800] leading-tight">350 ر.س</div>
+                <div className="text-[11px] text-slate-300 font-medium">تنظيف دور</div>
+                <div className="text-lg sm:text-xl font-black text-[#e2ad47] my-0.5 font-mono">350</div>
+                <div className="text-[10px] text-slate-400">ريال سعودي</div>
               </a>
 
               <a
-                id="quick-pill-villa"
-                href={getWhatsAppLink('تنظيف فيلا', '750 ريال')}
+                id="btn-fast-villa-750"
+                href={getWhatsAppLink('تنظيف فيلا كاملة', '750 ريال')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 sm:flex-initial text-center bg-[#070d18] text-white hover:bg-black px-4 py-2.5 rounded-xl border border-white/20 shadow-md transition-all duration-200 transform hover:-translate-y-0.5"
-                title="حجز تنظيف فيلا 750 ريال"
+                className="group p-3 rounded-xl bg-[#10203d] hover:bg-[#152a50] border border-[#233a64] hover:border-[#e2ad47] text-center transition-all duration-200 cursor-pointer"
+                title="طلب حجز تنظيف فيلا 750 ريال"
               >
-                <div className="text-[11px] text-gray-300 font-medium">فيلا</div>
-                <div className="text-lg font-black text-[#e6a800] leading-tight">750 ر.س</div>
+                <div className="text-[11px] text-slate-300 font-medium">تنظيف فيلا</div>
+                <div className="text-lg sm:text-xl font-black text-[#e2ad47] my-0.5 font-mono">750</div>
+                <div className="text-[10px] text-slate-400">ريال سعودي</div>
               </a>
             </div>
           </div>
         </section>
 
-        {/* ===================== SERVICES GRID ===================== */}
-        <section id="landing-services-section" className="mt-10">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="h-0.5 flex-1 bg-gradient-to-r from-transparent to-[#e6a800]/50" />
-            <h2 className="text-xl sm:text-2xl font-black text-[#e6a800] tracking-wide px-2 flex items-center gap-2">
-              <span>✦</span>
-              <span>خدماتنا وعروضنا الحصرية</span>
-              <span>✦</span>
+        {/* ===================== SERVICES DETAILED CATALOG ===================== */}
+        <section id="services-catalog" className="mt-12">
+          <div className="text-center max-w-xl mx-auto mb-8">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+              تفاصيل الخدمات والأسعار
             </h2>
-            <div className="h-0.5 flex-1 bg-gradient-to-l from-transparent to-[#e6a800]/50" />
+            <p className="text-xs sm:text-sm text-slate-400 mt-2">
+              اختر الخدمة المناسبة لمنزلك، واضغط على زر الحجز لإرسال تفاصيل الخدمة والسعر مباشرة لفريق خدمة العملاء عبر واتساب.
+            </p>
           </div>
 
-          <p className="text-center text-xs sm:text-sm text-gray-300 mb-6 max-w-lg mx-auto">
-            اضغط على أي خدمة للحجز المباشر عبر الواتساب فوراً بنفس السعر المحدد والمضمون
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
             {servicesList.map((service) => {
               const waUrl = getWhatsAppLink(service.name, `${service.priceNum} ريال`);
               return (
-                <a
+                <div
                   key={service.id}
-                  id={`service-card-${service.id}`}
-                  href={waUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative bg-[#0d1c38]/80 hover:bg-[#11254a] border-2 border-white/10 hover:border-[#e6a800] rounded-2xl p-5 text-right transition-all duration-300 shadow-lg hover:shadow-[0_8px_30px_rgba(230,168,0,0.22)] transform hover:-translate-y-1 flex flex-col justify-between block cursor-pointer"
-                  title={`احجز الآن: ${service.name} بـ ${service.price}`}
+                  id={`service-${service.id}`}
+                  className="rounded-2xl bg-[#0b172c] border border-[#1b2f52] p-5 sm:p-6 flex flex-col justify-between hover:border-[#2b487c] transition-all duration-200"
                 >
-                  {/* Top Badge */}
-                  {service.badge && (
-                    <div className="absolute top-3 left-3 bg-[#e6a800] text-[#070d18] text-[10px] font-black px-2.5 py-0.5 rounded-full shadow">
-                      {service.badge}
-                    </div>
-                  )}
-
                   <div>
-                    {/* Icon & Title */}
-                    <div className="flex items-center gap-3 mb-2.5">
-                      <span className="text-3xl p-2 rounded-xl bg-white/5 border border-white/10 group-hover:scale-110 transition-transform duration-300">
-                        {service.icon}
-                      </span>
+                    {/* Header: Category & Price Tag */}
+                    <div className="flex items-start justify-between gap-3 mb-3">
                       <div>
-                        <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[#e6a800] transition-colors">
+                        <span className="text-[11px] font-medium text-slate-400 uppercase tracking-wider block">
+                          {service.category}
+                        </span>
+                        <h3 className="text-base sm:text-lg font-bold text-white mt-0.5">
                           {service.name}
                         </h3>
-                        <div className="inline-block bg-gradient-to-r from-[#e6a800] to-[#c8920a] text-[#070d18] font-black text-sm px-2.5 py-0.5 rounded-lg mt-0.5">
-                          {service.price} {service.unit && <span className="text-[11px] font-bold">({service.unit})</span>}
+                      </div>
+
+                      <div className="text-left shrink-0">
+                        <div className="text-lg sm:text-xl font-extrabold text-[#e2ad47] font-mono">
+                          {service.price}
                         </div>
+                        {service.unit && (
+                          <div className="text-[10px] text-slate-400 font-light">{service.unit}</div>
+                        )}
                       </div>
                     </div>
 
+                    {/* Tag badge */}
+                    {service.tag && (
+                      <div className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-2.5 py-0.5 rounded-md mb-3">
+                        <BadgeCheck className="w-3 h-3" />
+                        <span>{service.tag}</span>
+                      </div>
+                    )}
+
                     {/* Description */}
-                    <p className="text-xs text-gray-300 leading-relaxed mb-3">
+                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
                       {service.desc}
                     </p>
 
-                    {/* Features checklist */}
-                    <ul className="space-y-1 mb-4">
-                      {service.features.map((feat, idx) => (
-                        <li key={idx} className="text-[11px] text-gray-400 flex items-center gap-1.5">
-                          <CheckCircle2 className="w-3 h-3 text-[#e6a800] shrink-0" />
-                          <span>{feat}</span>
-                        </li>
+                    {/* Features List */}
+                    <div className="space-y-1.5 pt-3 border-t border-[#162744] mb-5">
+                      {service.features.map((feature, idx) => (
+                        <div key={idx} className="flex items-center gap-2 text-xs text-slate-300">
+                          <Check className="w-3.5 h-3.5 text-[#e2ad47] shrink-0" />
+                          <span>{feature}</span>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
 
-                  {/* WhatsApp Action Button inside the card */}
-                  <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs font-bold text-emerald-400 group-hover:text-emerald-300">
-                    <span className="inline-flex items-center gap-1.5">
-                      <MessageSquare className="w-4 h-4 fill-emerald-400 text-emerald-400" />
-                      احجز بالواتساب بـ {service.priceNum} ريال
+                  {/* Primary WhatsApp Action */}
+                  <a
+                    id={`wa-btn-${service.id}`}
+                    href={waUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3 px-4 rounded-xl bg-[#1f3760] hover:bg-[#27467a] active:bg-[#172c4e] text-white text-xs sm:text-sm font-bold flex items-center justify-between transition-colors duration-200 border border-[#2b4c84]"
+                    title={`حجز ${service.name} بـ ${service.price}`}
+                  >
+                    <span className="flex items-center gap-2">
+                      <MessageSquare className="w-4 h-4 text-emerald-400 fill-emerald-400" />
+                      <span>حجز الخدمة عبر واتساب ({service.priceNum} ر.س)</span>
                     </span>
-                    <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-[#070d18] transition-colors">
-                      <ArrowLeft className="w-3.5 h-3.5" />
-                    </span>
-                  </div>
-                </a>
+                    <ArrowLeft className="w-4 h-4 text-slate-300" />
+                  </a>
+                </div>
               );
             })}
           </div>
         </section>
 
-        {/* ===================== WHY US SECTION ===================== */}
-        <section id="landing-why-us" className="mt-12">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="h-0.5 flex-1 bg-gradient-to-r from-transparent to-[#e6a800]/50" />
-            <h2 className="text-xl sm:text-2xl font-black text-[#e6a800] tracking-wide px-2 flex items-center gap-2">
-              <span>✦</span>
-              <span>لماذا نحن خيارك الأول بالرياض؟</span>
-              <span>✦</span>
+        {/* ===================== WHY CHOOSE US ===================== */}
+        <section id="why-choose-us" className="mt-14">
+          <div className="rounded-2xl bg-[#0a1529] border border-[#1b2f52] p-6 sm:p-8">
+            <div className="text-center max-w-xl mx-auto mb-8">
+              <span className="text-xs font-semibold text-[#e2ad47] uppercase tracking-wider block mb-1">
+                معايير الأداء والاحترافية
+              </span>
+              <h2 className="text-xl sm:text-2xl font-bold text-white">
+                لماذا يفضل عملاؤنا صفوة الرياض؟
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-400 mt-2">
+                نجمع بين الخبرة الميدانية الطويلة والالتزام الصارم بمعايير النظافة والتعقيم الفندقي.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {trustPillars.map((pillar, i) => (
+                <div
+                  key={i}
+                  className="p-4 rounded-xl bg-[#0e1d38]/70 border border-[#1a2f54] text-right"
+                >
+                  <div className="w-8 h-8 rounded-lg bg-[#142647] border border-[#213a68] flex items-center justify-center text-xs font-bold text-[#e2ad47] mb-3">
+                    0{i + 1}
+                  </div>
+                  <h3 className="text-sm font-bold text-white mb-1.5">{pillar.title}</h3>
+                  <p className="text-xs text-slate-300 leading-relaxed font-light">{pillar.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===================== REAL REVIEWS ===================== */}
+        <section id="customer-reviews" className="mt-14">
+          <div className="text-center max-w-xl mx-auto mb-8">
+            <span className="text-xs font-semibold text-[#e2ad47] uppercase tracking-wider block mb-1">
+              تجارب حقيقية
+            </span>
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
+              آراء وتقييمات عملائنا في أحياء الرياض
             </h2>
-            <div className="h-0.5 flex-1 bg-gradient-to-l from-transparent to-[#e6a800]/50" />
+            <p className="text-xs sm:text-sm text-slate-400 mt-1">
+              أكثر من 1,480 تقييم معتمد من أصحاب المنازل والفلل
+            </p>
           </div>
 
-          <div className="space-y-2.5">
-            {whyUsItems.map((item, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {customerReviews.map((rev, idx) => (
               <div
-                key={i}
-                className="bg-[#0d1c38]/60 border border-white/10 border-r-4 border-r-[#e6a800] rounded-xl p-3.5 sm:p-4 flex items-start gap-3 shadow-sm hover:bg-[#0d1c38] transition-colors"
+                key={idx}
+                className="p-5 rounded-2xl bg-[#0b172c] border border-[#1b2f52] flex flex-col justify-between"
               >
-                <span className="text-xl sm:text-2xl shrink-0 mt-0.5">{item.icon}</span>
                 <div>
-                  <h4 className="text-sm sm:text-base font-bold text-white mb-0.5">{item.title}</h4>
-                  <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">{item.desc}</p>
+                  <div className="flex items-center gap-1 text-[#e2ad47] mb-3">
+                    {[...Array(rev.rating)].map((_, rIdx) => (
+                      <Star key={rIdx} className="w-3.5 h-3.5 fill-[#e2ad47]" />
+                    ))}
+                  </div>
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light mb-4">
+                    &ldquo;{rev.comment}&rdquo;
+                  </p>
+                </div>
+
+                <div className="pt-3 border-t border-[#162744] flex items-center justify-between text-xs">
+                  <div>
+                    <div className="font-bold text-white">{rev.name}</div>
+                    <div className="text-[11px] text-slate-400">{rev.district}</div>
+                  </div>
+                  <span className="text-[10px] text-[#e2ad47] bg-[#e2ad47]/10 px-2 py-0.5 rounded">
+                    {rev.service}
+                  </span>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* ===================== CONTACT BOX ===================== */}
+        {/* ===================== CONTACT & DIRECT BOOKING BOX ===================== */}
         <section
-          id="landing-contact-section"
-          className="mt-12 rounded-3xl p-6 sm:p-10 text-center border-2 border-[#1242a8] bg-gradient-to-b from-[#0e214d] to-[#071126] shadow-2xl relative overflow-hidden"
+          id="direct-contact-cta"
+          className="mt-14 rounded-2xl bg-gradient-to-r from-[#0d1e3d] via-[#102449] to-[#0d1e3d] border border-[#233e6f] p-6 sm:p-10 text-center shadow-lg"
         >
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#e6a800]/20 border-2 border-[#e6a800] text-3xl mb-3 text-[#e6a800]">
-            📞
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#18315c] border border-[#274b88] text-[#e2ad47] mb-4">
+            <PhoneCall className="w-5 h-5" />
           </div>
 
-          <h3 className="text-xl sm:text-2xl font-black text-white mb-1">
-            جاهزون لخدمتك في الحال
-          </h3>
-          <p className="text-xs sm:text-sm text-gray-300 mb-4 font-normal">
-            اتصل بنا هاتفياً أو تواصل فوراً عبر الواتساب لتأكيد موعدك خلال دقائق
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">
+            هل لديك أي استفسار أو طلب خاص؟
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto mb-6">
+            فريق خدمة العملاء جاهز للرد على اتصالاتكم ورسائلكم لتحديد الموعد الأنسب وتقديم المعاينة الميدانية المجانية.
           </p>
 
-          {/* Large Phone Display */}
           <div className="mb-6">
             <a
-              id="landing-phone-big-link"
+              id="cta-phone-large"
               href={`tel:${siteConfig.phone}`}
-              className="text-3xl sm:text-4xl md:text-5xl font-black text-[#e6a800] hover:text-[#ffbe1a] tracking-wider block font-mono transition-colors"
+              className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#e2ad47] hover:text-white font-mono transition-colors tracking-wide inline-block"
               dir="ltr"
             >
               {siteConfig.phoneDisplay}
             </a>
-            <span className="text-xs text-gray-400 mt-1 inline-block">متاح على مدار 24 ساعة لجميع أحياء الرياض</span>
+            <div className="text-xs text-slate-400 mt-1">الرقم الموحد لخدمات التنظيف بالرياض (24 ساعة)</div>
           </div>
 
-          {/* Call & WhatsApp Dual CTA */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
             <a
-              id="landing-call-btn-main"
+              id="cta-call-direct"
               href={`tel:${siteConfig.phone}`}
-              className="w-full sm:w-1/2 py-3.5 px-5 rounded-xl bg-gradient-to-r from-[#e6a800] to-[#c8920a] hover:from-[#ffbe1a] hover:to-[#e6a800] text-[#070d18] font-black text-sm flex items-center justify-center gap-2 shadow-lg transition-all duration-200 transform hover:scale-[1.02]"
+              className="w-full sm:w-1/2 py-3 px-5 rounded-xl bg-[#e2ad47] hover:bg-[#d69e35] text-[#08101e] font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition-colors"
             >
-              <PhoneCall className="w-4 h-4" />
-              <span>اتصل بنا الآن</span>
+              <Phone className="w-4 h-4" />
+              <span>اتصال هاتفي مباشر</span>
             </a>
 
             <a
-              id="landing-whatsapp-btn-main"
-              href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent('مرحباً صفوة الرياض، أود الاستفسار وحجز خدمة نظافة')}`}
+              id="cta-wa-direct"
+              href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent('السلام عليكم، أود الاستفسار عن باقات التنظيف وحجز موعد.')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-1/2 py-3.5 px-5 rounded-xl bg-[#25d366] hover:bg-[#20ba59] text-white font-black text-sm flex items-center justify-center gap-2 shadow-lg transition-all duration-200 transform hover:scale-[1.02]"
+              className="w-full sm:w-1/2 py-3 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition-colors"
             >
               <MessageSquare className="w-4 h-4 fill-white" />
-              <span>واتساب فوري</span>
+              <span>محادثة واتساب فورية</span>
             </a>
           </div>
         </section>
 
-        {/* ===================== FAQ ACCORDION ===================== */}
-        <section id="landing-faqs" className="mt-12">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="h-0.5 flex-1 bg-gradient-to-r from-transparent to-[#e6a800]/50" />
-            <h2 className="text-lg sm:text-xl font-bold text-white px-2">
-              الأسئلة الأكثر شيوعاً
-            </h2>
-            <div className="h-0.5 flex-1 bg-gradient-to-l from-transparent to-[#e6a800]/50" />
+        {/* ===================== FAQ SECTION ===================== */}
+        <section id="faqs" className="mt-14">
+          <div className="text-center max-w-xl mx-auto mb-8">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">الأسئلة الشائعة</h2>
+            <p className="text-xs sm:text-sm text-slate-400 mt-1">
+              إجابات واضحة عن كافة التساؤلات المتعلقة بالأسعار، آلية العمل، والضمان
+            </p>
           </div>
 
-          <div className="space-y-2.5">
+          <div className="space-y-3">
             {faqs.map((faq, index) => {
               const isOpen = activeFaq === index;
               return (
                 <div
                   key={index}
-                  className="rounded-xl border border-white/10 bg-[#0d1c38]/40 overflow-hidden"
+                  className="rounded-xl border border-[#1b2f52] bg-[#0b172c] overflow-hidden"
                 >
                   <button
-                    id={`faq-btn-${index}`}
+                    id={`faq-trigger-${index}`}
                     onClick={() => setActiveFaq(isOpen ? null : index)}
-                    className="w-full py-3.5 px-4 text-right flex items-center justify-between gap-3 text-sm font-semibold text-white hover:text-[#e6a800] transition-colors"
+                    className="w-full py-4 px-5 text-right flex items-center justify-between gap-4 text-xs sm:text-sm font-semibold text-white hover:text-[#e2ad47] transition-colors"
                   >
                     <span>{faq.q}</span>
                     <ChevronDown
-                      className={`w-4 h-4 text-[#e6a800] transition-transform duration-200 shrink-0 ${
-                        isOpen ? 'rotate-180' : ''
+                      className={`w-4 h-4 text-slate-400 transition-transform duration-200 shrink-0 ${
+                        isOpen ? 'rotate-180 text-[#e2ad47]' : ''
                       }`}
                     />
                   </button>
                   {isOpen && (
-                    <div className="px-4 pb-4 pt-1 text-xs sm:text-sm text-gray-300 leading-relaxed border-t border-white/5 font-light">
+                    <div className="px-5 pb-4 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-[#152541] font-light">
                       {faq.a}
                     </div>
                   )}
@@ -478,83 +611,90 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ===================== GUARANTEE BADGE ===================== */}
-        <div className="mt-10 p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center gap-3 text-xs sm:text-sm text-gray-300 text-center">
-          <ShieldCheck className="w-6 h-6 text-[#e6a800] shrink-0" />
-          <span>
-            <strong>ضمان الجودة الذهبي:</strong> نلتزم بأعلى معايير النظافة والتعقيم، وفريقنا لا يغادر حتى تكون راضياً بنسبة 100%.
-          </span>
-        </div>
+        {/* ===================== SIMPLE FOOTER ===================== */}
+        <footer className="mt-16 pt-8 border-t border-[#172743] text-center text-xs text-slate-400 space-y-2">
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-slate-400">
+            <Link href="/" className="hover:text-white transition-colors">
+              الرئيسية
+            </Link>
+            <span>•</span>
+            <Link href="/services" className="hover:text-white transition-colors">
+              دليل الخدمات
+            </Link>
+            <span>•</span>
+            <Link href="/areas" className="hover:text-white transition-colors">
+              أحياء الرياض
+            </Link>
+            <span>•</span>
+            <Link href="/contact" className="hover:text-white transition-colors">
+              اتصل بنا
+            </Link>
+          </div>
 
-        {/* ===================== FOOTER ===================== */}
-        <footer className="mt-12 pt-6 border-t border-white/10 text-center text-xs text-gray-400 space-y-2">
-          <p>
-            تم تصميم الموقع بواسطة{' '}
+          <p className="text-[11px] text-slate-500 pt-2">
+            تم التصميم والتطوير بواسطة{' '}
             <a
-              id="landing-nasharhub-link"
+              id="footer-nasharhub-link-lp"
               href="https://nasharhub.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#e6a800] hover:underline font-bold"
+              className="text-slate-300 hover:underline font-medium"
             >
               NasharHub
             </a>
           </p>
-          <p className="text-gray-500 text-[11px]">
-            © {new Date().getFullYear()} {siteConfig.name} – كافة الحقوق محفوظة لخدمات النظافة بالرياض
+
+          <p className="text-[11px] text-slate-500">
+            جميع الحقوق محفوظة © {new Date().getFullYear()} {siteConfig.name} – شركة خدمات نظافة متخصصة بالرياض
           </p>
         </footer>
-      </div>
+      </main>
 
-      {/* ===================== SIDE FLOATING BUTTONS (DESKTOP & TABLET) ===================== */}
-      <div className="fixed left-4 bottom-24 hidden md:flex flex-col gap-3 z-50">
-        {/* WhatsApp Button with pulse */}
+      {/* ===================== FLOATING DESKTOP ACTIONS ===================== */}
+      <div className="fixed left-6 bottom-8 hidden md:flex flex-col gap-2.5 z-40">
         <a
-          id="side-float-whatsapp"
-          href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent('مرحباً صفوة الرياض، أود الاستفسار عن حجز خدمة نظافة')}`}
+          id="side-action-whatsapp"
+          href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent('السلام عليكم، أود حجز خدمة تنظيف شقة 299 ريال.')}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-14 h-14 rounded-full bg-[#25d366] hover:bg-[#20ba59] text-white flex items-center justify-center shadow-[0_4px_20px_rgba(37,211,102,0.45)] transition-all duration-200 transform hover:scale-110 relative"
-          title="تواصل واتساب"
+          className="w-12 h-12 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center shadow-lg transition-transform hover:scale-105"
+          title="تواصل معنا عبر واتساب"
         >
-          <MessageSquare className="w-6 h-6 fill-white" />
-          <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-[#070d18] animate-ping" />
-          <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-[#070d18]" />
+          <MessageSquare className="w-5 h-5 fill-white" />
         </a>
 
-        {/* Call Button Gold */}
         <a
-          id="side-float-call-gold"
+          id="side-action-call"
           href={`tel:${siteConfig.phone}`}
-          className="w-14 h-14 rounded-full bg-gradient-to-br from-[#e6a800] to-[#b8760a] hover:from-[#ffbe1a] hover:to-[#e6a800] text-[#070d18] flex items-center justify-center shadow-[0_4px_20px_rgba(230,168,0,0.4)] transition-all duration-200 transform hover:scale-110"
-          title="اتصال مباشر"
+          className="w-12 h-12 rounded-full bg-[#1b345e] hover:bg-[#23437a] text-[#e2ad47] flex items-center justify-center shadow-lg border border-[#2b4c84] transition-transform hover:scale-105"
+          title="اتصال هاتفي مباشر"
         >
-          <PhoneCall className="w-6 h-6" />
+          <Phone className="w-5 h-5" />
         </a>
       </div>
 
-      {/* ===================== FLOATING BOTTOM BAR (MOBILE FIXED) ===================== */}
+      {/* ===================== FLOATING MOBILE CONVERSION BAR ===================== */}
       <div
         id="landing-mobile-bar"
-        className="fixed bottom-0 inset-x-0 bg-[#070f20]/95 backdrop-blur-md border-t-2 border-[#e6a800]/40 p-2.5 px-3 flex gap-2.5 z-50 md:hidden shadow-[0_-4px_25px_rgba(0,0,0,0.6)]"
+        className="fixed bottom-0 inset-x-0 bg-[#091325]/95 backdrop-blur border-t border-[#1b2f52] p-2.5 px-4 flex gap-2.5 z-40 md:hidden shadow-2xl"
       >
         <a
-          id="mobile-landing-wa-btn"
-          href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent('مرحباً صفوة الرياض، أود حجز خدمة نظافة شقة 299 ريال')}`}
+          id="mobile-action-whatsapp"
+          href={getWhatsAppLink('تنظيف شقة', '299 ريال')}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 py-3 px-2 rounded-xl bg-[#25d366] text-white font-bold text-sm flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition-transform"
+          className="flex-1 py-3 px-2 rounded-xl bg-emerald-600 active:bg-emerald-700 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow"
         >
           <MessageSquare className="w-4 h-4 fill-white" />
-          <span>واتساب فوري</span>
+          <span>واتساب (شقة 299 ر.س)</span>
         </a>
 
         <a
-          id="mobile-landing-call-btn"
+          id="mobile-action-call"
           href={`tel:${siteConfig.phone}`}
-          className="flex-1 py-3 px-2 rounded-xl bg-gradient-to-r from-[#e6a800] to-[#c8920a] text-[#070d18] font-bold text-sm flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition-transform"
+          className="flex-1 py-3 px-2 rounded-xl bg-[#1b3561] active:bg-[#132747] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 border border-[#274a86] shadow"
         >
-          <Phone className="w-4 h-4" />
+          <Phone className="w-4 h-4 text-[#e2ad47]" />
           <span>اتصال: {siteConfig.phoneDisplay}</span>
         </a>
       </div>
