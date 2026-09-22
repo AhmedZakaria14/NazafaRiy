@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { siteConfig } from '@/lib/siteConfig';
 import { Phone, Mail, MapPin, MessageSquare, ArrowUpLeft } from 'lucide-react';
 import { SafwaLogo } from '@/components/ui/SafwaLogo';
@@ -7,6 +10,13 @@ import { servicesData } from '@/lib/servicesData';
 import { areasData } from '@/lib/areasData';
 
 export function Footer() {
+  const pathname = usePathname();
+
+  // Hide general footer on landing page
+  if (pathname === '/landingpage' || pathname?.startsWith('/landingpage')) {
+    return null;
+  }
+
   return (
     <footer id="main-footer" className="bg-black text-white border-t border-white/10 pt-20 pb-28 sm:pb-16 px-6 md:px-12 lg:px-16 relative overflow-hidden">
       <div className="max-w-7xl mx-auto">

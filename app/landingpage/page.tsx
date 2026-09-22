@@ -215,7 +215,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#08101e] text-slate-100 font-sans selection:bg-[#c99738] selection:text-[#08101e] pb-24 md:pb-16 antialiased">
+    <div className="min-h-screen bg-[#08101e] text-slate-100 font-sans selection:bg-[#c99738] selection:text-[#08101e] pb-32 sm:pb-24 antialiased">
       {/* ===================== TOP NOTIFICATION BAR ===================== */}
       <div className="bg-[#0b172d] border-b border-[#1f3152] py-2.5 px-4">
         <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs sm:text-sm text-slate-300">
@@ -651,7 +651,7 @@ export default function LandingPage() {
       </main>
 
       {/* ===================== FLOATING DESKTOP ACTIONS ===================== */}
-      <div className="fixed left-6 bottom-8 hidden md:flex flex-col gap-2.5 z-40">
+      <div className="fixed left-6 bottom-8 hidden md:flex flex-col gap-2.5 z-50">
         <a
           id="side-action-whatsapp"
           href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent('السلام عليكم، أود حجز خدمة تنظيف شقة 299 ريال.')}`}
@@ -676,7 +676,7 @@ export default function LandingPage() {
       {/* ===================== FLOATING MOBILE CONVERSION BAR ===================== */}
       <div
         id="landing-mobile-bar"
-        className="fixed bottom-0 inset-x-0 bg-[#091325]/95 backdrop-blur border-t border-[#1b2f52] p-2.5 px-4 flex gap-2.5 z-40 md:hidden shadow-2xl"
+        className="fixed bottom-0 inset-x-0 bg-[#091325]/95 backdrop-blur-md border-t border-[#1b2f52] p-2.5 px-4 pb-[max(0.625rem,env(safe-area-inset-bottom))] flex gap-2.5 z-50 md:hidden shadow-2xl"
       >
         <a
           id="mobile-action-whatsapp"

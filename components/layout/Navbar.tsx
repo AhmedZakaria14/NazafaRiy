@@ -34,6 +34,11 @@ export function Navbar() {
     }
   }, [pathname]);
 
+  // Hide general website navbar on landingpage so it doesn't cover landing page header and CTAs
+  if (pathname === '/landingpage' || pathname?.startsWith('/landingpage')) {
+    return null;
+  }
+
   const navLinks = [
     { label: 'الرئيسية', href: '/' },
     { label: 'خدماتنا', href: '/services' },

@@ -2,11 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { siteConfig } from '@/lib/siteConfig';
 import { Phone, MessageSquare, CalendarCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export function MobileBottomBar() {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -21,6 +23,11 @@ export function MobileBottomBar() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Do not render on landing page to avoid covering landing page specific CTAs
+  if (pathname === '/landingpage' || pathname?.startsWith('/landingpage')) {
+    return null;
+  }
 
   return (
     <AnimatePresence>
